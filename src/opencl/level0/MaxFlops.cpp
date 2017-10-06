@@ -604,47 +604,47 @@ RunTest(cl_device_id id,
   //      err = clSetKernelArg(kernel_madd, 2, sizeof(T), (void*)&val2);
   //      CL_CHECK_ERROR(err);
 
-        for (int passCounter=0; passCounter < npasses; passCounter++)
-        {
-            // Event object for timing
-            Event evKernel_madd("madd");
+    //    for (int passCounter=0; passCounter < npasses; passCounter++)
+    //    {
+    //        // Event object for timing
+    //        Event evKernel_madd("madd");
 
-            err = clEnqueueNDRangeKernel(queue, kernel_madd, 2, NULL,
-                      globalWorkSize, localWorkSize,
-                      0, NULL, &evKernel_madd.CLEvent());
-            CL_CHECK_ERROR(err);
+    //        err = clEnqueueNDRangeKernel(queue, kernel_madd, 2, NULL,
+    //                  globalWorkSize, localWorkSize,
+    //                  0, NULL, &evKernel_madd.CLEvent());
+    //        CL_CHECK_ERROR(err);
 
-            // Wait for the kernel to finish
-            err = clWaitForEvents(1, &evKernel_madd.CLEvent());
-            CL_CHECK_ERROR(err);
-            evKernel_madd.FillTimingInfo();
+    //        // Wait for the kernel to finish
+    //        err = clWaitForEvents(1, &evKernel_madd.CLEvent());
+    //        CL_CHECK_ERROR(err);
+    //        evKernel_madd.FillTimingInfo();
 
-            // Calculate result and add to DB
-            char atts[1024];
-            double nflopsPerItem = getUFlopCount(kCounter, false, tentativeRepeats, nUnrolls);
-            sprintf(atts, "Size:%d", w*h);
-            double gflops = (double) (nflopsPerItem*w*h) /
-                            (double) evKernel_madd.SubmitEndRuntime();
+    //        // Calculate result and add to DB
+    //        char atts[1024];
+    //        double nflopsPerItem = getUFlopCount(kCounter, false, tentativeRepeats, nUnrolls);
+    //        sprintf(atts, "Size:%d", w*h);
+    //        double gflops = (double) (nflopsPerItem*w*h) /
+    //                        (double) evKernel_madd.SubmitEndRuntime();
 
-            if (kCounter) {
-                resultDB.AddResult(string("MulMAddU")+precision, atts, "GFLOPS", gflops);
-            } else {
-                resultDB.AddResult(string("MAddU")+precision, atts, "GFLOPS", gflops);
-            }
-            // update progress bar
-            pb.addItersDone();
-            if (!verbose && !quiet)
-            {
-                pb.Show(stdout);
-            }
-        }
-        err = clReleaseKernel(kernel_madd);
-        CL_CHECK_ERROR(err);
-        err = clReleaseProgram(prog);
-        CL_CHECK_ERROR(err);
-    }
-    err = clReleaseMemObject(mem1);
-    CL_CHECK_ERROR(err);
+    //        if (kCounter) {
+    //            resultDB.AddResult(string("MulMAddU")+precision, atts, "GFLOPS", gflops);
+    //        } else {
+    //            resultDB.AddResult(string("MAddU")+precision, atts, "GFLOPS", gflops);
+    //        }
+    //        // update progress bar
+    //        pb.addItersDone();
+    //        if (!verbose && !quiet)
+    //        {
+    //            pb.Show(stdout);
+    //        }
+    //    }
+    //    err = clReleaseKernel(kernel_madd);
+    //    CL_CHECK_ERROR(err);
+    //    err = clReleaseProgram(prog);
+    //    CL_CHECK_ERROR(err);
+    //}
+    //err = clReleaseMemObject(mem1);
+    //CL_CHECK_ERROR(err);
 }
 
 
