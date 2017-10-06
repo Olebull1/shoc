@@ -439,7 +439,8 @@ RunTest(cl_device_id id,
        }
 	   size_t maxGroupSize = 1;
        size_t localWorkSize[2] = {1, 1};
-       maxGroupSize = getMaxWorkGroupSize(ctx, kernel_madd);
+	   getMaxWorkGroupSize(id);
+       //maxGroupSize = getMaxWorkGroupSize(ctx, kernel_madd);
        cout << "Max group size " << maxGroupSize << endl;
        localWorkSize[0] = maxGroupSize<128?maxGroupSize:128;
 
@@ -585,7 +586,7 @@ RunTest(cl_device_id id,
         //size_t localWorkSize = maxGroupSize<128?maxGroupSize:128;
         size_t maxGroupSize = 1;
         size_t localWorkSize[2] = {1, 1};
-        maxGroupSize = getMaxWorkGroupSize(ctx, kernel_madd);
+        maxGroupSize = getMaxWorkGroupSize(id);
         localWorkSize[0] = maxGroupSize<128?maxGroupSize:128;
         cout << "Max group size " << maxGroupSize << endl;
         size_t globalWorkSize[2] = {min(w*h, 65536), max(w*h / 65536, 1)};
