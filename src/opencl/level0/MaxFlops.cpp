@@ -1574,4 +1574,4 @@ generateUKernel(int useMADDMUL, bool doublePrecision, int nRepeats, int nUnrolls
 //				s16+s17+s18+s19+s20+s21+s22+s23+   
 //				s24+s25+s26+s27+s28+s29+s30+s31);  
 //target[index] = result;                            
-}
+//}
