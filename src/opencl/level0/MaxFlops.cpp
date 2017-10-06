@@ -572,6 +572,7 @@ RunTest(cl_device_id id,
                        typeName, pragmaText);
 
         const char* progSource[] = {kSource.c_str()};
+		cout << "The Program source right before crash: " << progSource[] << "\n";
         cl_program prog = clCreateProgramWithSource(ctx,
                                  1, progSource, NULL, &err);
         CL_CHECK_ERROR(err);
