@@ -203,7 +203,8 @@ void RunBenchmark(cl_device_id id,
        CL_CHECK_ERROR (err);
 
        // Determine the maximum work group size for this kernel
-       maxGroupSize = getMaxWorkGroupSize(ctx, kernel_madd);
+	   maxGroupSize = getMaxWorkGroupSize(id);
+       //maxGroupSize = getMaxWorkGroupSize(ctx, kernel_madd);
 	   cout << "Max group size " << maxGroupSize << endl;
        // use min(maxWorkGroupSize, 256)
        localWorkSize[0] = maxGroupSize<128?maxGroupSize:128;
